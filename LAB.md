@@ -6,7 +6,10 @@ Create a fullstack vue/postgres app that allows users to track their goals.
 
 Complete [today's Kata](https://www.codewars.com/kata/sum-of-odd-cubed-numbers)
 
-## Build
+## Setup and Build
+
+You will need to create both your `app` and `server` folders, and 
+setup them each up (vue for app and express for server).
 
 Make sure you are using proxy feature for development:
 * Use the proxy feature from the Vue dev server to the backend express server
