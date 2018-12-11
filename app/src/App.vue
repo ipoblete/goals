@@ -1,17 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <header>
+      <img alt="Vue logo" src="./assets/logo.png">
+    </header>
+
+    <main>
+      <RouterView v-if="user" :user="user"/>
+      <Auth v-else
+        :onSignUp="handleSignUp"
+        :onSignIn="handleSignIn"
+      />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import api from '../services/api';
+import Auth from './auth/Auth';
 
 export default {
-  name: 'app',
+  data() {
+    return {
+      user: null
+    };
+  },
   components: {
-    HelloWorld
+    Auth
+  },
+  methods: {
+    handleSignUp(profile) {
+      return api.signUp(profile)
+        .then(user => {
+          this.setUser(user);
+        });
+    },
+    handleSignIn(credentials) {
+      return api.signIn(credentials)
+        .then(user => {
+          this.setUser(user);
+        });
+    }
   }
 };
 </script>
