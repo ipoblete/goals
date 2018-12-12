@@ -5,6 +5,16 @@ const auth = require('./routes/auth');
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use('/api/auth', auth);
 
+function checkAuth(req, res, next) {
+  const userId = req.get('Authorization');
+  if(!userId) {
+    res.status(401).json({ error: 'no authorization found' });
+    return;
+  }
+  req.userId = userId;
+  next();
+}
+
+app.use('/api/auth', auth);
 module.exports = app;
