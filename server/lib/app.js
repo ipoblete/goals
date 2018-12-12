@@ -17,4 +17,6 @@ function checkAuth(req, res, next) {
 }
 
 app.use('/api/auth', auth);
+app.use('/api/goals', checkAuth);
+
 module.exports = app;
