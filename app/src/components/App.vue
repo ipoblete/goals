@@ -2,6 +2,13 @@
   <div class="app">
     <header>
       <h1>Goals</h1>
+      <span v-if="user">
+        Hello {{user.username}}!
+      </span>
+      <nav v-if="user">
+        <RouterLink to="/">Home</RouterLink>
+        <a href="#" @click="handleLogout">Logout</a>
+      </nav>
     </header>
 
     <main>
@@ -27,6 +34,12 @@ export default {
   components: {
     Auth
   },
+  created() {
+    const json = window.localStorage.getItem('profile');
+    if(json) {
+      this.setUser(JSON.parse(json));
+    }
+  },
   methods: {
     handleSignUp(profile) {
       return api.signUp(profile)
@@ -39,6 +52,21 @@ export default {
         .then(user => {
           this.setUser(user);
         });
+    },
+    setUser(user) {
+      this.user = user;
+      if(user) {
+        api.setToken(user.id);
+        window.localStorage.setItem('profile', JSON.stringify(user));
+      }
+      else {
+        api.setToken();
+        window.localStorage.removeItem('profile');
+      }
+    },
+    handleLogout() {
+      this.setUser(null);
+      this.$router.push('/');
     }
   }
 };

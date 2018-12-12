@@ -16,6 +16,10 @@ const getOptions = (method, data) => {
 };
 
 export default {
+
+  setToken(t) {
+    token = t;
+  },
   signUp(profile) {
     return fetch('api/auth/signup', getOptions('POST', profile))
       .then(response => {
