@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <header>
-      <img alt="Vue logo" src="./assets/logo.png">
+      <h1>Goals</h1>
     </header>
 
     <main>
