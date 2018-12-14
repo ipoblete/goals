@@ -3,9 +3,9 @@
     <label>Goal:</label>
     <input v-model="goal.title" require>
     <label>Start Date:</label>
-    <input v-model="goal.startDate" require>
+    <input v-model="goal.startDate" type="date" require>
     <label>End Date:</label>
-    <input v-model="goal.endDate" require>
+    <input v-model="goal.endDate" type="date" require>
     <button>Add</button>
   </form>
 </template>
@@ -15,8 +15,8 @@
 function initGoal() {
   return {
     title: '',
-    startDate: '',
-    endDate: ''
+    startDate: null,
+    endDate: null
   };
 }
 
