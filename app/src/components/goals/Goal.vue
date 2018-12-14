@@ -1,5 +1,10 @@
 <template>
-  <li>{{goal.title}}</li>
+  <li>
+    <p>{{goal.title}}</p>
+    <p>{{goal.startDate}}</p>
+    <p>{{goal.endDate}}</p>
+  </li>
+
 </template>
 
 <script>
