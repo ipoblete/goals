@@ -45,6 +45,11 @@ export default {
             return Promise.reject(error);
           });
       });
+  },
+
+  getGoals() {
+    return fetch('/api/goals', getOptions('GET'))
+      .then(response => response.json());
   }
 };
 
