@@ -1,6 +1,9 @@
 const router = require('express').Router();
 const client = require('../db-client');
 const bcrypt = require('bcryptjs');
+const jwt = require('../jwt');
+
+const APP_SECRET = 'CHANGEMENOW';
 
 router
   .post('/signup', (req, res) => {
@@ -43,7 +46,9 @@ router
         [username, firstName, lastName, email, bcrypt.hashSync(password, 8)]
         )
           .then(result => {
-            res.json(result.rows[0]);
+            const profile = result.rows[0];
+            profile.token = jwt.sign({ id: profile.id }, APP_SECRET);
+            res.json(profile);
           });
       });
   })
