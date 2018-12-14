@@ -1,4 +1,5 @@
 const client = require('../lib/db-client');
+const bcrypt = require('bcryptjs');
 
 const goals = [
   { title: 'walk dogs', startDate: '2020-10-12', endDate: null },
@@ -7,11 +8,11 @@ const goals = [
 ];
 
 client.query(`
-  INSERT INTO profile(username, first_name, last_name, email, password)
+  INSERT INTO profile(username, first_name, last_name, email, hash)
   VALUES ($1, $2, $3, $4, $5)
   RETURNING id;
 `,
-['motleydog', 'motley', 'poblete', 'motley@gmail.com', 'abc123']
+['motleydog', 'motley', 'poblete', 'motley@gmail.com', bcrypt.hashSync('abc123', 8)]
 )
   .then(result => {
     const profile = result.rows[0];
