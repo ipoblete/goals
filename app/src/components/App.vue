@@ -5,11 +5,13 @@
       <span v-if="user">
         Hello {{user.username}}!
       </span>
-      <nav v-if="user">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/goals">Goals</RouterLink>
-        <a href="#" @click="handleLogout">Logout</a>
-      </nav>
+      <div class="nav">
+        <nav v-if="user">
+          <RouterLink id="home" to="/">Home</RouterLink>
+          <RouterLink id="goals" to="/goals">Goals</RouterLink>
+          <a href="#" @click="handleLogout" id="logout">Logout</a>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -81,5 +83,27 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+header {
+  background-color: black;
+}
+
+h1{
+  color: aliceblue;
+  padding: 10px;
+}
+
+#home {
+  color: lightblue;
+  padding: 10px;
+}
+#goals {
+  color: lightblue;
+  padding: 10px;
+}
+#logout {
+  color: lightblue;
+  padding: 10px;
 }
 </style>
