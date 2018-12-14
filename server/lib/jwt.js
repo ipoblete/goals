@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
-const APP_SECRET = 'CHANGEMENOW';
 
 module.exports = {
   sign(profile) {
-    return jwt.sign({ id: profile.id }, APP_SECRET);
+    return jwt.sign({ id: profile.id });
   },
   verify(token) {
-    return jwt.verify(token, APP_SECRET);
+    return jwt.verify(token);
   }
 };

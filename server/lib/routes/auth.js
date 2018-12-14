@@ -3,7 +3,13 @@ const client = require('../db-client');
 const bcrypt = require('bcryptjs');
 const jwt = require('../jwt');
 
-const APP_SECRET = 'CHANGEMENOW';
+function getProfileWithToken(profile) {
+  return {
+    id: profile.id,
+    username: profile.username,
+    token: jwt.sign({ id: profile.id })
+  };
+}
 
 router
   .post('/signup', (req, res) => {
@@ -47,8 +53,7 @@ router
         )
           .then(result => {
             const profile = result.rows[0];
-            profile.token = jwt.sign({ id: profile.id }, APP_SECRET);
-            res.json(profile);
+            res.json(getProfileWithToken(profile));
           });
       });
   })
@@ -75,11 +80,7 @@ router
           res.status(400).json({ error: 'username or password incorrect' });
           return;
         }
-        res.json({
-          id: profile.id,
-          username: profile.username,
-          token: jwt.sign({ id: profile.id }, APP_SECRET)
-        });
+        res.json(getProfileWithToken(profile));
       });
   });
 
