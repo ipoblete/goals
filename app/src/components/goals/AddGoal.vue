@@ -1,0 +1,45 @@
+<template>
+  <form @submit.prevent="handleSubmit">
+    <label>Goal:</label>
+    <input v-model="goal.title" require>
+    <label>Start Date:</label>
+    <input v-model="goal.startDate" require>
+    <label>End Date:</label>
+    <input v-model="goal.endDate" require>
+    <button>Add</button>
+  </form>
+</template>
+
+<script>
+
+function initGoal() {
+  return {
+    title: '',
+    startDate: '',
+    endDate: ''
+  };
+}
+
+export default {
+  props: {
+    onAdd: Function
+  },
+  data() {
+    return {
+      goal: initGoal()
+    };
+  },
+  methods: {
+    handleSubmit() {
+      this.onAdd(this.goal)
+        .then(() => {
+          this.goal = initGoal();
+        });
+    }
+  }
+};
+</script>
+
+<style>
+
+</style>

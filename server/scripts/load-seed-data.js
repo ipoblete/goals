@@ -1,7 +1,7 @@
 const client = require('../lib/db-client');
 
 const goals = [
-  { title: 'walk dogs', startDate: '2020-10-12', endDate: '2020-10-13' },
+  { title: 'walk dogs', startDate: '2020-10-12', endDate: null },
   { title: 'wash car', startDate: '2020-11-11', endDate: null },
   { title: 'laundry', startDate: '2020-10-20', endDate: null }
 ];

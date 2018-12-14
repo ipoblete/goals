@@ -1,10 +1,9 @@
 <template>
   <li>
-    <p>{{goal.title}}</p>
-    <p>{{goal.startDate}}</p>
-    <p>{{goal.endDate}}</p>
+    <p><span>Goal:</span> {{goal.title}}</p>
+    <p><span>Start Date:</span> {{goal.startDate}}</p>
+    <p><span>End Date:</span> {{goal.endDate}}</p>
   </li>
-
 </template>
 
 <script>
@@ -16,5 +15,7 @@ export default {
 </script>
 
 <style>
-
+span {
+  font-weight: bold;
+}
 </style>
