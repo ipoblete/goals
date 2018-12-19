@@ -3,11 +3,13 @@ const client = require('../db-client');
 const bcrypt = require('bcryptjs');
 const jwt = require('../jwt');
 
+const APP_SECRET = 'abc123';
+
 function getProfileWithToken(profile) {
   return {
     id: profile.id,
     username: profile.username,
-    token: jwt.sign({ id: profile.id })
+    token: jwt.sign({ id: profile.id }, APP_SECRET)
   };
 }
 
