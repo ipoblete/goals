@@ -2,13 +2,26 @@
   <section>
     <div v-if="method === 'signin'">
       <h2>Sign In</h2>
-
       <p>
         Need to register?
         <button @click="method = 'signup'">Sign Up</button>
       </p>
       
-      <CredentialsForm prompt="Sign In" :onSubmit="handleSignIn"/>      
+      <form @submit.prevent="handleSignInSubmit(profile)">
+        <label>
+          Username:
+          <input v-model="profile.username" required>
+        </label>
+
+        <label>
+          Password:
+          <input type="password" v-model="profile.password" required>
+        </label>
+
+        <label>
+          <button>Sign In</button>
+        </label>
+      </form>
     </div>
 
     <div v-else>
@@ -19,9 +32,7 @@
         <button @click="method = 'signin'">Sign In</button>
       </p>
 
-      <CredentialsForm prompt="Sign Up" :onSubmit="handleSignUp"/>
-
-      <!-- <form @submit.prevent="handleSignUpSubmit(profile)">
+      <form @submit.prevent="handleSignUpSubmit(profile)">
         <label>
           Username:
           <input v-model="profile.username" required>
@@ -45,14 +56,13 @@
         <label>
           <button>Sign Up</button>
         </label>
-      </form> -->
+      </form>
     </div>
     <pre v-if="error">{{error}}</pre>
   </section>
 </template>
 
 <script>
-import CredentialsForm from './CredentialsForm';
 
 export default {
   props: {
@@ -62,14 +72,18 @@ export default {
   data() {
     return {
       method: 'signin',
-      error: ''
+      error: '',
+      profile: {
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+      }
     };
   },
-  components: {
-    CredentialsForm
-  },
   methods: {
-    handleSignIn(profile) {
+    handleSignInSubmit(profile) {
       this.error = '';
 
       this.onSignIn(profile)
@@ -77,7 +91,7 @@ export default {
           this.error = error.error;
         });
     },
-    handleSignUp(profile) {
+    handleSignUpSubmit(profile) {
       this.error = '';
 
       this.onSignUp(profile)
